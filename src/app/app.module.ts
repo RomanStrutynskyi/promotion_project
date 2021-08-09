@@ -7,6 +7,7 @@ import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import { AuthModule } from '@auth';
 import { environment } from '@env';
 import { EffectsModule } from '@ngrx/effects';
@@ -39,6 +40,9 @@ import { LayoutModule } from './layout/layout.module';
     HttpClientModule,
     AngularFireStorageModule,
     LayoutModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     { provide: BUCKET, useValue: environment.firebase.storageBucket },

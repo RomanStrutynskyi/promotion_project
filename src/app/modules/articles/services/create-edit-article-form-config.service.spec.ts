@@ -71,6 +71,7 @@ describe('CreateEditArticleFormConfigService', () => {
           label: 'Cancel',
           type: 'button',
           classWrapper: 'col row no-gutters justify-content-end ',
+          classNames: 'create-edit-article__cancel',
           action: { type: 'cancel' },
           style: {
             color: 'primary',
@@ -112,6 +113,7 @@ describe('CreateEditArticleFormConfigService', () => {
           label: 'Cancel',
           type: 'button',
           classWrapper: 'col row no-gutters justify-content-end ',
+          classNames: 'create-edit-article__cancel',
           action: { type: 'cancel' },
           style: {
             color: 'primary',

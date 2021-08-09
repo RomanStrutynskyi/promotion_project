@@ -3,6 +3,9 @@ describe('Widgets', () => {
     cy.login();
   });
   beforeEach(() => {
+    cy.intercept('get', ' https://api.coingecko.com/api/v3/coins/list', {
+      fixture: 'crypto-currencies.js',
+    });
     cy.intercept('get', '*api/v3/coins/markets?*').as('loadCurrency');
     cy.visit('/');
   });
@@ -10,7 +13,6 @@ describe('Widgets', () => {
   describe('Widget Edit', () => {
     const settingsBtn = '.crypto-currencies__button';
     const submitBtn = '.crypto-currencies__form button[type="submit"]';
-    const loadOptionsTimeout = 50000;
     it('should show form if click on settings button', () => {
       cy.wait('@loadCurrency').then(() => {
         cy.get('.crypto-currencies__form').should('not.exist');
@@ -43,9 +45,30 @@ describe('Widgets', () => {
           .first()
           .click()
           .then(() => {
-            cy.getWithWait('mat-option', loadOptionsTimeout)
-              .contains(/^Acoin$/)
-              .click();
+            cy.getWithWait('mat-option').contains('Acoin').click();
+            clickOutside();
+          });
+        cy.get('mat-select')
+          .last()
+          .click()
+          .then(() => {
+            cy.get('mat-option').contains('Ukrainian hryvnia').click();
+          });
+        cy.get(submitBtn).click();
+        cy.wait('@loadCurrency').then(() => {
+          cy.getWithWait('.crypto-currencies__list').contains('Acoin');
+          cy.getWithWait('.crypto-currencies__list').contains('₴');
+        });
+      });
+    });
+    it('should remove cryptoCurrency and change currency', () => {
+      cy.wait('@loadCurrency').then(() => {
+        cy.get(settingsBtn).click();
+        cy.get('mat-select')
+          .first()
+          .click()
+          .then(() => {
+            cy.getWithWait('mat-option').contains('Acoin').click();
             clickOutside();
           });
         cy.get('mat-select')
@@ -58,34 +81,26 @@ describe('Widgets', () => {
         cy.wait('@loadCurrency').then(() => {
           cy.get('.crypto-currencies__list').contains('Acoin');
           cy.get('.crypto-currencies__list').contains('₴');
-        });
-      });
-    });
-    it('should remove cryptoCurrency and change currency', () => {
-      cy.wait('@loadCurrency').then(() => {
-        cy.get(settingsBtn).click();
-        cy.get('mat-select')
-          .first()
-          .click()
-          .then(() => {
-            cy.getWithWait('mat-option', loadOptionsTimeout)
-              .contains(/^Acoin$/)
-              .click();
-            clickOutside();
+          cy.get(settingsBtn).click();
+
+          cy.get('mat-select')
+            .first()
+            .click()
+            .then(() => {
+              cy.getWithWait('mat-option').contains('Acoin').click();
+              clickOutside();
+            });
+          cy.get('mat-select')
+            .last()
+            .click()
+            .then(() => {
+              cy.get('mat-option').contains('US Dollar').click();
+            });
+          cy.get(submitBtn).click();
+          cy.wait('@loadCurrency').then(() => {
+            cy.get('.crypto-currencies__list').should('not.contain', 'Acoin');
+            cy.get('.crypto-currencies__list').contains('$');
           });
-        cy.get('mat-select')
-          .last()
-          .click()
-          .then(() => {
-            cy.get('mat-option').contains('US Dollar').click();
-          });
-        cy.get(submitBtn).click();
-        cy.wait('@loadCurrency').then(() => {
-          cy.getWithWait('.crypto-currencies__list', loadOptionsTimeout).should(
-            'not.contain.text',
-            'Acoin'
-          );
-          cy.get('.crypto-currencies__list').contains('$');
         });
       });
     });
@@ -96,9 +111,7 @@ describe('Widgets', () => {
           .first()
           .click()
           .then(() => {
-            cy.getWithWait('mat-option', loadOptionsTimeout)
-              .contains(/^Acoin$/)
-              .click();
+            cy.getWithWait('mat-option').contains('Acoin').click();
             clickOutside();
           });
         cy.get('mat-select')
@@ -129,9 +142,7 @@ describe('Widgets', () => {
           .first()
           .click()
           .then(() => {
-            cy.getWithWait('mat-option', loadOptionsTimeout)
-              .contains(/^Bitcoin$/)
-              .click();
+            cy.getWithWait('mat-option').contains('Bitcoin').click();
             let i = 0;
             while (i < 11) {
               cy.get('mat-option').eq(i).click();
@@ -156,9 +167,7 @@ describe('Widgets', () => {
           .first()
           .click()
           .then(() => {
-            cy.getWithWait('mat-option', loadOptionsTimeout)
-              .contains(/^Bitcoin$/)
-              .click();
+            cy.getWithWait('mat-option').contains('Bitcoin').click();
             clickOutside();
             cy.contains('Please select Crypto Currencies');
           });

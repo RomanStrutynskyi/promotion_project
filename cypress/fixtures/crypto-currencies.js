@@ -1,0 +1,21 @@
+[
+  ...new Array(200).fill({}),
+  {
+    id: 'aave-knc-v1',
+    name: 'Aave KNC v1',
+    symbol: 'aknc',
+  },
+  { id: 'acoin', symbol: 'acoin', name: 'Acoin' },
+  { id: 'bcv', symbol: 'bcv', name: 'BitCapitalVendor' },
+  { id: 'bdollar', symbol: 'bdo', name: 'bDollar' },
+  { id: 'bdollar-share', symbol: 'sbdo', name: 'bDollar Share' },
+  { id: 'beacon', symbol: 'becn', name: 'Beacon' },
+  { id: 'beam', symbol: 'beam', name: 'BEAM' },
+  { id: 'bean-cash', symbol: 'bitb', name: 'Bean Cash' },
+  { id: 'bearn-fi', symbol: 'bfi', name: 'Bearn.fi' },
+  { id: 'beast-dao', symbol: 'beast', name: 'Beast DAO' },
+  { id: 'beatzcoin', symbol: 'btzc', name: 'BeatzCoin' },
+  { id: 'beautyk', symbol: 'btkc', name: 'BeautyK' },
+  { id: 'beaxy-exchange', symbol: 'bxy', name: 'Beaxy' },
+  { id: 'bitcoin', symbol: 'btc', name: 'Bitcoin' },
+]

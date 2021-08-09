@@ -5,5 +5,4 @@ export const MOCK_FIREBASE_ERROR: IFirebaseError = {
   message: 'error',
   type: 'type',
   email: 'test@email.com',
-  // credential?
 };

@@ -17,7 +17,7 @@ export class IconService {
       this.matIconRegistry.addSvgIcon(
         name,
         this.domSanitizer.bypassSecurityTrustResourceUrl(
-          `assets/icon/${name}.svg`
+          `assets/icons/${name}.svg`
         )
       );
     });

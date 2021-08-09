@@ -21,6 +21,7 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
+    "allowJs": true,
     "lib": ["es2018", "dom"],
     "paths": {
       "@env": ["src/environments/environment"],
@@ -29,7 +30,6 @@
       "@auth": ["src/app/auth/index.ts"],
       "@testing": ["src/app/testing/index.ts"],
       "@modules/*": ["src/app/modules/*"]
-    },
-    "allowJs": true
+    }
   }
 }

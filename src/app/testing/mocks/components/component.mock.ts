@@ -7,7 +7,6 @@ import { Component, EventEmitter } from '@angular/core';
 
 export function ComponentMock(options: Component): Component {
   const metadata = { ...options };
-  metadata.selector = metadata.selector;
   metadata.template = metadata.template || '';
   metadata.outputs = metadata.outputs || [];
   metadata.exportAs = metadata.exportAs || '';

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { FieldType } from '@ngx-formly/core';
 
 @Component({
@@ -7,6 +7,7 @@ import { FieldType } from '@ngx-formly/core';
     <input
       [id]="id"
       type="file"
+      accept="image/*"
       [formlyAttributes]="field"
       [formControl]="formControl"
     />
